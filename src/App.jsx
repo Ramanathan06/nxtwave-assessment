@@ -1,38 +1,14 @@
-import {useState} from 'react'
-import ProductCard from "./components/ProductCard"
-import { products } from './products'
-function App() 
-  { 
-    const [search, setSearch] = useState("")
+import { Routes,Route } from 'react-router-dom'
+import Home from './pages/Home'
+import ProductDetail from  './pages/ProductDetail'
 
-    const filteredProducts = products.filter((product)=>
-      product.name.toLowerCase().includes(search.toLowerCase())
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/products/:id" element={<ProductDetail />} />
+    </Routes>
   )
-    return (
-      <div className="p-8">
-        <h1 className="mb-6 text-3x1 font-bold text-gray-800">
-        ProductHub
-        </h1>
-        <input 
-          type="text"
-          placeholder='Search products...'
-          value={search}
-          onChange = {(event) => setSearch(event.target.value)} 
-          classNmae="mb-6 w-full max-w-sm rounded-md border border-gray-300 px-3 py-2" 
-        /> 
-        <div className = "flex flex-wrap gap-4">
-          {filteredProducts.map((product)=> (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              category={product.category}
-              price={product.price}
-            />
-          ))}
-        </div>
-      </div>
-    )
-  }
-
-  export default App
+}
+export default App
 
